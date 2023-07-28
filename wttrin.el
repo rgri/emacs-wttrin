@@ -47,6 +47,8 @@
   (interactive)
   (quit-window t))
 
+(define-derived-mode wttrin-mode fundamental-mode "wttrin")
+
 (defun wttrin-query (city-name)
   "Query weather of CITY-NAME via wttrin, and display the result in new buffer."
   (let ((raw-string (wttrin-fetch-raw-string city-name)))
@@ -63,7 +65,7 @@
         (use-local-map (make-sparse-keymap))
         (local-set-key "q" 'wttrin-exit)
         (local-set-key "g" 'wttrin)
-        (setq buffer-read-only t)))))
+        (wttrin-mode)))))
 
 ;;;###autoload
 (defun wttrin (city)
